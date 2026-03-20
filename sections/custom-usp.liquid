@@ -1,0 +1,76 @@
+{% schema %}
+{
+  "name": "Features Dynamic",
+  "max_blocks": 5,
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Free Shipping"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "On all orders"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Features Dynamic"
+    }
+  ]
+}
+{% endschema %}
+
+
+
+<div class="features-wrapper">
+  <div class="page-width">
+
+    <div class="features-flex">
+
+      {% for block in section.blocks %}
+
+        <div class="feature-item" {{ block.shopify_attributes }}>
+
+          {% if block.settings.image != blank %}
+
+            {{
+              block.settings.image
+              | image_url: width: 150
+              | image_tag:
+                class: 'feature-icon',
+                alt: block.settings.heading
+            }}
+
+          {% endif %}
+
+          <h4 class="feature-heading">
+            {{ block.settings.heading }}
+          </h4>
+
+          <p class="feature-subheading">
+            {{ block.settings.subheading }}
+          </p>
+
+        </div>
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+</div>

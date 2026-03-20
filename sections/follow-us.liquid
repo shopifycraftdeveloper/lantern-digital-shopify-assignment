@@ -1,0 +1,32 @@
+{% schema %}
+{
+  "name": "Follow Us Bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "FOLLOW US"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Follow Us Bar"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="follow-bar">
+  <div class="page-width">
+    <div class="follow-inner">
+      <div class="follow-text">
+        {{ section.settings.text }}
+      </div>
+
+      <div class="follow-icons">
+        {% render 'social-icons' %}
+      </div>
+    </div>
+  </div>
+</div>

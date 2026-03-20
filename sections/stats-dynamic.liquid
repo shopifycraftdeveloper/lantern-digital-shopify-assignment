@@ -1,0 +1,120 @@
+{% schema %}
+{
+  "name": "Stats Counter",
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "25,000+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Text",
+          "default": "Customers"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "Stats Counter"
+    }
+  ]
+}
+{% endschema %}
+
+
+
+<div class="stats-section">
+
+  <div class="page-width">
+
+    <div class="stats-flex">
+
+      {% for block in section.blocks %}
+
+        <div class="stat-item" {{ block.shopify_attributes }}>
+
+          {% if block.settings.icon != blank %}
+
+            {{
+              block.settings.icon
+              | image_url: width: 80
+              | image_tag: class: 'stat-icon'
+            }}
+
+          {% endif %}
+
+          <h3 class="stat-value">
+            {{ block.settings.value }}
+          </h3>
+
+          <p class="stat-label">
+            {{ block.settings.label }}
+          </p>
+
+        </div>
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<style>
+
+.stats-section {
+  background: #f3f3f3;
+  padding: 25px 0;
+}
+
+.stats-flex {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-icon {
+  width: 40px;
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.stat-label {
+  font-size: 14px;
+}
+
+@media(max-width: 768px){
+
+  .stats-flex {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+}
+
+</style>
